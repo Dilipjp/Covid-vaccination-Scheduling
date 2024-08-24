@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "690704988607",
+    "firebase_url": "https://covid-app-73fd3-default-rtdb.firebaseio.com",
+    "project_id": "covid-app-73fd3",
+    "storage_bucket": "covid-app-73fd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690704988607:android:7a2ae4eb017e592789890a",
+        "android_client_info": {
+          "package_name": "com.example.covid_app_2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2lp7WhxG3DPZFECQO2hid0RBAiMCWXsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690704988607:android:7aa35e9808d1dda289890a",
+        "android_client_info": {
+          "package_name": "com.example.covid_app_2.covid_app_3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2lp7WhxG3DPZFECQO2hid0RBAiMCWXsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690704988607:android:d120d83755d2ffef89890a",
+        "android_client_info": {
+          "package_name": "com.example.covid_shedule_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2lp7WhxG3DPZFECQO2hid0RBAiMCWXsk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
