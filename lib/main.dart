@@ -4,11 +4,14 @@ import 'screens/splash_screen.dart';
 import 'screens/sign_in_screen.dart';
 import 'screens/sign_up_screen.dart';
 import 'screens/main_screen.dart';
+import 'data/add_centers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const MyApp());
+  addCentersToFirestore();
 }
 
 class MyApp extends StatelessWidget {
