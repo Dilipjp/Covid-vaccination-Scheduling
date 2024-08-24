@@ -55,6 +55,29 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
+  // Password Reset method
+  Future<void> _resetPassword() async {
+    if (_emailController.text.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please enter your email to reset password';
+      });
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(
+        email: _emailController.text.trim(),
+      );
+      setState(() {
+        _errorMessage = 'Password reset email sent';
+      });
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _errorMessage = e.message;
+      });
+    }
+  }
+
   @override
   void dispose() {
     // Dispose controllers when the widget is removed
@@ -127,7 +150,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   obscureText: true,
                   validator: _validatePassword,
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 8),
+                // Forgot Password link
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    onPressed: _resetPassword,
+                    child: const Text('Forgot Password?'),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 // Sign-In button or loading indicator
                 _isLoading
                     ? const CircularProgressIndicator()
