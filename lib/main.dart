@@ -11,7 +11,7 @@ void main() async {
   await Firebase.initializeApp();
 
   runApp(const MyApp());
-  addCentersToFirestore();
+  // addCentersToFirestore();
 }
 
 class MyApp extends StatelessWidget {
