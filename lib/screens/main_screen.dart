@@ -16,10 +16,10 @@ class _MainScreenState extends State<MainScreen> {
 
   // List of widgets to be displayed when the tabs are selected
   final List<Widget> _screens = [
-    const HomeScreen(title: 'Home'),
-    const CentersScreen(),
-    const ProfileScreen(),
-    const SettingsScreen(),
+    HomeScreen(title: 'Home'),  // Removed const here
+    CentersScreen(),            // Removed const here
+    ProfileScreen(),            // Removed const here
+    SettingsScreen(),           // Removed const here
   ];
 
   void _onTabTapped(int index) {
