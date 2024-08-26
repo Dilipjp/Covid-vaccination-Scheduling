@@ -108,7 +108,16 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign In'),
+        title: const Center(
+          child: Text(
+            'Welcome! Please Sign In',
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+        ,
       ),
       body: SingleChildScrollView(
         child: Padding(
