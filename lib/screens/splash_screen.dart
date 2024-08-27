@@ -31,7 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CircularProgressIndicator(), // You can use your own splash screen content here
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Image.asset('assets/images/splash_logo.png', width: 600, height: 800),
+            SizedBox(height: 20), // Space between image and progress indicator
+            CircularProgressIndicator(),
+          ],
+        ),
       ),
     );
   }
