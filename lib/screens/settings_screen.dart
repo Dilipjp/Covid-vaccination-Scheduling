@@ -1,4 +1,11 @@
+import 'package:covid_app_3/screens/change_password_screen.dart';
+import 'package:covid_app_3/screens/editprofile_screen.dart';
+import 'package:covid_app_3/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'privacy_policy.dart';
+import 'help_support_screen.dart';
+import 'sign_in_screen.dart'; // Assuming you have a sign-in screen
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({Key? key}) : super(key: key);
@@ -22,6 +29,11 @@ class SettingsScreen extends StatelessWidget {
             subtitle: 'View and edit your profile',
             onTap: () {
               // Navigate to profile settings
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>  ProfileScreen(),
+                ),
+              );
             },
           ),
           _buildSettingsTile(
@@ -31,6 +43,11 @@ class SettingsScreen extends StatelessWidget {
             subtitle: 'Update your password',
             onTap: () {
               // Navigate to change password screen
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>  const ChangePasswordScreen(),
+                ),
+              );
             },
           ),
           const SizedBox(height: 20),
@@ -82,6 +99,11 @@ class SettingsScreen extends StatelessWidget {
             subtitle: 'Get help or contact support',
             onTap: () {
               // Navigate to help & support
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>  HelpSupportScreen(),
+                ),
+              );
             },
           ),
           _buildSettingsTile(
@@ -91,6 +113,11 @@ class SettingsScreen extends StatelessWidget {
             subtitle: 'Read our privacy policy',
             onTap: () {
               // Navigate to privacy policy
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => const PrivacyPolicyScreen(),
+                ),
+              );
             },
           ),
           const SizedBox(height: 20),
@@ -100,8 +127,13 @@ class SettingsScreen extends StatelessWidget {
             icon: Icons.logout,
             title: 'Log Out',
             subtitle: 'Sign out of your account',
-            onTap: () {
-              // Handle log out
+            onTap: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const SignInScreen(),
+                ),
+              );
             },
             isDestructive: true,
           ),
