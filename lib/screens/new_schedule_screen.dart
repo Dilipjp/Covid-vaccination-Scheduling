@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class NewScheduleScreen extends StatefulWidget {
   @override
@@ -13,7 +13,7 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
   DateTime? _date;
   String? _additionalInfo;
   String? _selectedCenter;
-  List<String> _centers = []; // List of centers to be fetched from Firestore
+  List<String> _centers = [];
 
   @override
   void initState() {
@@ -30,10 +30,11 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
   }
 
   Future<void> _selectDate(BuildContext context) async {
+    final DateTime now = DateTime.now();
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
+      initialDate: now,
+      firstDate: now,
       lastDate: DateTime(2101),
     );
 
@@ -47,7 +48,7 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
   void _saveSchedule() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      if (_date == null || _selectedCenter == null) {
+      if (_date == null || _selectedCenter == null || _vaccineName == null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Please complete all fields')),
         );
@@ -61,9 +62,9 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
         'id': docRef.id,
         'userId': userId,
         'vaccineName': _vaccineName,
-        'date': _date!.toIso8601String(),
+        'date': Timestamp.fromDate(_date!), // Convert DateTime to Timestamp
         'additionalInfo': _additionalInfo,
-        'center': _selectedCenter,  // Save center name directly
+        'center': _selectedCenter,
       });
 
       Navigator.pop(context);
@@ -83,17 +84,26 @@ class _NewScheduleScreenState extends State<NewScheduleScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Vaccine Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter vaccine name';
-                  }
-                  return null;
+              DropdownButtonFormField<String>(
+                value: _vaccineName,
+                hint: Text('Select Vaccine'),
+                items: [
+                  '1st Vaccine',
+                  '2nd Vaccine',
+                  '3rd Vaccine',
+                  '4th Vaccine'
+                ].map((vaccine) {
+                  return DropdownMenuItem<String>(
+                    value: vaccine,
+                    child: Text(vaccine),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _vaccineName = value;
+                  });
                 },
-                onSaved: (value) {
-                  _vaccineName = value;
-                },
+                validator: (value) => value == null ? 'Please select a vaccine' : null,
               ),
               SizedBox(height: 16),
               Row(
